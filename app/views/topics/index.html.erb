@@ -1,11 +1,11 @@
-<h1>All Bookmarks</h1>
+<h1>All Topics</h1>
 
 <div class="row">
   <div class="col-md-8">
     <% if @topics && (@topics.count > 0) %>
       <%= render partial: 'topic_entry', collection: @topics %>
     <% else %>
-      <h4>No Topics Have Been Created Yet</h4>
+      <h4>No Topics Have Been Created Yet, why not <%= link_to "Create One", new_topic_path %></h4>
     <% end %>
   </div>
 </div>

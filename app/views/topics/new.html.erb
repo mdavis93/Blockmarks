@@ -1,2 +1,24 @@
-<h1>Topics#new</h1>
-<p>Find me in app/views/topics/new.html.erb</p>
+<h1>New Blockmarks Topic</h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <p>Guidelines for Blockmark Topics</p>
+    <ul>
+      <li>
+        Be general in nature
+        <ul>
+          <li>Use "Sports" instead of "Tennis"</li>
+          <li>Use "Cats" instead of "Main Coons"</li>
+          <li>Use "Cars" instead of "Maserati"</li>
+        </ul>
+      </li>
+      <li>Must be family-friendly</li>
+      <li>Must be unqiely named</li>
+      <li>Must be between 3 and 10 characters</li>
+    </ul>
+  </div>
+
+  <div class="col-md-8">
+    <%= render partial: 'form', locals: { topic: @topic } %>
+  </div>
+</div>

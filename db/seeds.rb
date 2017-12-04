@@ -5,3 +5,41 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+5.times do
+  pw = Faker::Internet.password
+  User.create!(
+    email: Faker::Internet.safe_email,
+    password: pw,
+    confirmed_at: Time.now
+  )
+end
+users = User.all
+
+15.times do
+  user = users.sample
+  user.topics.create!(
+    title: Faker::Book.title
+  )
+end
+topics = Topic.all
+
+50.times do
+  topic_to_use = topics.sample
+  topic_to_use.bookmarks.create!(url: Faker::Internet.domain_name)
+end
+bookmarks = Bookmark.all
+
+#Admin User
+User.create!(
+  email: "admin@blocmark.com",
+  password: "helloworld",
+  confirmed_at: Time.now,
+  role: 1
+)
+
+puts "Seed Complete"
+puts "#{User.count} users created"
+puts "#{Topic.count} topics created"
+puts "#{Bookmark.count} bookmarks created"
+puts "========"

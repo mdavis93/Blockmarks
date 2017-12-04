@@ -6,4 +6,8 @@ class User < ApplicationRecord
           :confirmable, :lockable
 
   has_many :topics
+
+  before_save { self.role ||= :member }
+
+  enum role: [:member, :admin]
 end

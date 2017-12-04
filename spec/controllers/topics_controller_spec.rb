@@ -4,6 +4,13 @@ RSpec.describe TopicsController, type: :controller do
   let(:my_user) { create(:user, email: 'test@blocmarks.com', password: 'helloworld') }
   let(:my_topic) { create(:topic, user: my_user) }
 
+
+  before do
+    my_user.confirm
+    my_user.admin!
+    sign_in my_user
+  end
+
   describe "GET #index" do
     it "returns http success" do
       get :index
@@ -31,11 +38,6 @@ RSpec.describe TopicsController, type: :controller do
   end
 
   describe "POST create" do
-    before do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
-      my_user.confirm
-      sign_in my_user
-    end
 
     it "increases the number of topics by 1" do
       expect{ post :create, params: { topic: { title: Faker::Book.title } } }.to change(Topic, :count).by(1)

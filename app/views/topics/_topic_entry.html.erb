@@ -1,0 +1,10 @@
+<div class="media">
+  <div class="media-body">
+    <h4 class="media-heading">
+      <%= link_to topic_entry.title, topic_path(topic_entry) %>
+    </h4>
+    <small>
+      Contains <%= topic_entry.bookmarks.count %> bookmarks.
+    </small>
+  </div>
+</div>

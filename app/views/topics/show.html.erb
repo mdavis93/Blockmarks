@@ -1,2 +1,27 @@
-<h1>Topics#show</h1>
+<h1><%= @topic.title %></h1>
 <p>Find me in app/views/topics/show.html.erb</p>
+
+<div class="row">
+  <div class="col-md-8">
+
+    <% @topic.bookmarks.each do |bookmark| %>
+      <div class="media">
+        <div class="media-body">
+          <div class="media-heading">
+            <%= link_to "Bookmark", "http://www.#{bookmark.url}" %>
+
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if current_user.admin? %>
+    <div class="col-md-4 alert alert-danger text-center">
+      <p class="text-justify">Deleting this topic will also delete all related bookmarks from all users.
+        Please exercise caution before proceeding as this is <strong>NOT REVERSIBLE</strong>.</p>
+        <hr>
+      <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger' %>
+    </div>
+  <% end %>
+</div>
