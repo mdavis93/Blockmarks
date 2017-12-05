@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-6">
+    <h1><%= @bookmark.url %></h1>
+    <small>
+      <%= link_to "Edit", "#", class: 'btn btn-info btn-small' %>&emsp;
+      <%= link_to "Delete", "#", class: 'btn btn-danger btn-small' %>
+    </small>
+
+    <div>
+      <p></p>
+      <p>
+        Created By: <%= @bookmark.topic.user.email.split('@')[0] %><br>
+        Created On: <%= @bookmark.created_at %>
+      </p>
+    </div>
+  </div>
+<%= console %>
+  <div class="col-md-6">
+    <%= image_tag("http://via.placeholder.com/550x500?text=placeholder-image", size: "550x500", class: "bookmark-preview") %>
+  </div>
+</div>

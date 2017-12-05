@@ -35,6 +35,16 @@ RSpec.describe TopicsController, type: :controller do
       get :new
       expect(response).to have_http_status(:success)
     end
+
+    it "returns #new view" do
+      get :new
+      expect(response).to render_template :new
+    end
+
+    it "instantiates @topic" do
+      get :new
+      expect(assigns(:topic)).not_to be_nil
+    end
   end
 
   describe "POST create" do

@@ -1,19 +1,24 @@
 <div class="jumbotron">
   <h1>Blocmarks</h1>
   <p>Collect, Share, and Organize bookmarks from across the web!  <small><%= link_to "Read More", about_path %></small></p>
-</div>
+</div> <!-- END JUMBOTRON -->
 
 <div class="row">
   <div class="col-sm-12">
     <div class="topic-header">
       <h3><span class="pull-left">Sports</span></h3>
-      <span class="pull-right">View All <span class="glyphicon glyphicon-chevron-right"></span></span>
+      <span class="pull-right">
+        <%= link_to topics_path do %>
+          View All <span class="glyphicon glyphicon-chevron-right"></span>
+        <% end %>
+      </span>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
+      <span class="glyphicon glyphicon-bookmark add-bookmark"></span>
       <div class="caption">
         <div style="background-color: #eee; height: 200px"></div>
         <h3 class="text-center">Page Title</h3>
@@ -22,6 +27,7 @@
   </div>
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
+      <span class="glyphicon glyphicon-bookmark add-bookmark favorited"></span>
       <div class="caption">
         <div style="background-color: #eee; height: 200px"></div>
         <h3 class="text-center">Page Title</h3>
@@ -30,6 +36,7 @@
   </div>
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
+      <span class="glyphicon glyphicon-bookmark add-bookmark"></span>
       <div class="caption">
         <div style="background-color: #eee; height: 200px"></div>
         <h3 class="text-center">Page Title</h3>
@@ -38,6 +45,7 @@
   </div>
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
+      <span class="glyphicon glyphicon-bookmark add-bookmark favorited"></span>
       <div class="caption">
         <div style="background-color: #eee; height: 200px"></div>
         <h3 class="text-center">Page Title</h3>
@@ -50,13 +58,18 @@
   <div class="col-sm-12">
     <div class="topic-header">
       <h3><span class="pull-left">Shopping</span></h3>
-      <span class="pull-right">View All <span class="glyphicon glyphicon-chevron-right"></span></span>
+      <span class="pull-right">
+        <%= link_to topics_path do %>
+          View All <span class="glyphicon glyphicon-chevron-right"></span>
+        <% end %>
+      </span>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
+      <span class="glyphicon glyphicon-bookmark add-bookmark favorited"></span>
       <div class="caption">
         <div style="background-color: #eee; height: 200px"></div>
         <h3 class="text-center">Page Title</h3>
@@ -65,6 +78,7 @@
   </div>
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
+      <span class="glyphicon glyphicon-bookmark add-bookmark favorited"></span>
       <div class="caption">
         <div style="background-color: #eee; height: 200px"></div>
         <h3 class="text-center">Page Title</h3>
@@ -73,6 +87,7 @@
   </div>
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
+      <span class="glyphicon glyphicon-bookmark add-bookmark"></span>
       <div class="caption">
         <div style="background-color: #eee; height: 200px"></div>
         <h3 class="text-center">Page Title</h3>
@@ -81,6 +96,7 @@
   </div>
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
+      <span class="glyphicon glyphicon-bookmark add-bookmark"></span>
       <div class="caption">
         <div style="background-color: #eee; height: 200px"></div>
         <h3 class="text-center">Page Title</h3>

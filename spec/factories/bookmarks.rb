@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :bookmark do
-    url "MyString"
-    topic 
+    sequence(:url) { |n| "http://www#{n}.google.com" }
+    topic
   end
 end

@@ -8,7 +8,7 @@
       <div class="media">
         <div class="media-body">
           <div class="media-heading">
-            <%= link_to "Bookmark", "http://www.#{bookmark.url}" %>
+            <%= link_to "http://www.#{bookmark.url}", topic_bookmark_path(@topic, bookmark) %>
 
           </div>
         </div>
