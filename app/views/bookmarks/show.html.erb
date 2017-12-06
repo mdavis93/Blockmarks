@@ -1,10 +1,12 @@
 <div class="row">
   <div class="col-md-6">
     <h1><%= @bookmark.url %></h1>
-    <small>
-      <%= link_to "Edit", "#", class: 'btn btn-info btn-small' %>&emsp;
-      <%= link_to "Delete", "#", class: 'btn btn-danger btn-small' %>
-    </small>
+    <% if current_user && ( @bookmark.topic.user == current_user || current_user.admin? ) %>
+      <small>
+        <%= link_to "Edit", "#", class: 'btn btn-info btn-small' %>&emsp;
+        <%= link_to "Delete", "#", class: 'btn btn-danger btn-small' %>
+      </small>
+    <% end %>
 
     <div>
       <p></p>
