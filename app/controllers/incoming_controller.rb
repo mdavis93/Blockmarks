@@ -1,6 +1,5 @@
-require 'net/http'
-
 class IncomingController < ApplicationController
+  include HTTParty
 
   # http://stackoverflow.com/questions/1177863/how-do-i-ignore-the-authenticity-token-for-specific-actions-in-rails
   skip_before_action :verify_authenticity_token, only: [:create]
@@ -23,14 +22,13 @@ class IncomingController < ApplicationController
     url = params["body-plain"]
 
     # Check if the URL is valid by making a GET request, and checking for HTTPSuccess
-    reqest = Net::HTTP.get_response(URI(url))
-    url_valid = request.kind_of? Net::HTTPSuccess
+    request = HTTParty.get(url)
 
     # Check if user is nil, if so, create and save a new user
       # This was skipped as I didn't much like the idea of just ~anyone~ being
       # able to email the system and create an account, essentially bypassing Devise
 
-    if user && url && url_valid
+    if user && url && request.success?
     # Check if the topic is nil, if so, create and save a new topic
       if topic
         t = Topic.create(topic: topic, user: user)
