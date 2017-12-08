@@ -5,18 +5,14 @@ class IncomingController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
 
   def create
-    # Take a look at these in your server logs
-    # to get a sense of what you're dealing with.
-    puts "INCOMING PARAMS HERE: #{params}"
-
     # You put the message-splitting and business
     # magic here.
 
     # Find the user by using params[:sender]
-    user = User.find_by_email(params[:sender])
+    user = User.find_by_email(params["sender"])
 
     # Find the topic by using params[:subject]
-    topic = Topic.find_by_title(params[:subject])
+    topic = Topic.find_by_title(params["subject"])
 
     # Assign the url to a variable after retreiving it from params["body-plain"]
     url = params["body-plain"]
@@ -30,13 +26,15 @@ class IncomingController < ApplicationController
 
     if user && url && request.success?
     # Check if the topic is nil, if so, create and save a new topic
-      if topic
-        t = Topic.create(topic: topic, user: user)
+      if !topic
+        t = Topic.create(title: params["subject"], user: user)
         t.bookmarks.create(url: url)
         t.save
-        puts "success!"
+        puts "Created New Topic With Bookmark Successfully!"
       else
-        puts "Error: No Topic"
+        topic.bookmarks.create(url: url)
+        topic.save
+        puts "Added Bookmark To Topic Successfully!"
       end
     else
       error = ""
