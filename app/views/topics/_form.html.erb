@@ -3,7 +3,7 @@
     <div class="alert alert-danger">
       <h4><%= pluralize(topic.errors.count, "error") %></h4>
       <ul>
-        <% post.error.full_messages.each do |msg| %>
+        <% topic.error.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>

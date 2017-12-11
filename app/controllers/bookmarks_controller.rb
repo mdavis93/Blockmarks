@@ -6,7 +6,28 @@ class BookmarksController < ApplicationController
   end
 
   def edit
+    if policy(Bookmark.find(params[:id])).edit?
+      @bookmark = Bookmark.find(params[:id])
+    else
+      flash[:alert] = "You are not authroized to do that!"
+      if !current_user
+        redirect_to new_user_session_path
+      else
+        redirect_to topics_path
+      end
+    end
+  end
+
+  def update
     @bookmark = Bookmark.find(params[:id])
+    @bookmark.assign_attributes(bookmark_params)
+
+    if @bookmark.save
+      flash[:notice] = "Bookmark Updated Successfully!"
+      redirect_to [@bookmark.topic, @bookmark]
+    else
+      flash.now[:alert] = "There was an error updating the bookmark, please try again!"
+    end
   end
 
   def new
