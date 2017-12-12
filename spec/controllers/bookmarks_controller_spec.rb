@@ -36,7 +36,7 @@ TODO: Fix EDIT tests
 
       it "returns http success" do
         get :edit, params_hash
-        expect(response).to redirect_to [my_bookmark.topic, my_bookmark]
+        expect(response).to have_http_status(:success)
       end
 
       it "renders the #edit view" do
