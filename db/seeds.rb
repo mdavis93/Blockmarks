@@ -26,7 +26,7 @@ topics = Topic.all
 
 50.times do
   topic_to_use = topics.sample
-  topic_to_use.bookmarks.create!(url: Faker::Internet.domain_name)
+  topic_to_use.bookmarks.create!(url: Faker::Internet.domain_name, user: users.sample)
 end
 bookmarks = Bookmark.all
 
@@ -36,6 +36,20 @@ User.create!(
   password: "helloworld",
   confirmed_at: Time.now,
   role: 1
+)
+
+#Normal User 1
+User.create!(
+  email: "test@blocmark.com",
+  password: "helloworld",
+  confirmed_at: Time.now
+)
+
+#Normal User 2
+User.create!(
+  email: "other@blocmark.com",
+  password: "helloworld",
+  confirmed_at: Time.now
 )
 
 puts "Seed Complete"

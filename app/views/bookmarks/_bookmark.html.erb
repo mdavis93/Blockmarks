@@ -1,0 +1,24 @@
+<div class="row" id="bookmark_<%= @bookmark.id %>">
+  <div class="col-md-6" >
+
+    <h1><%= format_link(@bookmark.url) %></h1>
+    <% if policy(@bookmark).edit? %>
+      <%= link_to "Edit", edit_topic_bookmark_path(@bookmark.topic), remote: true, class: 'btn btn-sm btn-info' %>
+    <% end %>
+    <% if policy(@bookmark).destroy? %>
+      <%= link_to "Delete", [@bookmark.topic, @bookmark], remote: true, method: :delete, data: { confirm: "Delete Bookmark Permanently?" }, class: 'btn btn-sm btn-danger' %>
+    <% end %>
+
+    <div>
+      <p></p>
+      <p>
+        Created By: <%= @bookmark.user.email.split('@')[0] %><br>
+        Created On: <%= @bookmark.created_at.strftime("%b %e, %Y") %>
+      </p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <%= image_tag("http://via.placeholder.com/550x500?text=placeholder-image", size: "550x500", class: "bookmark-preview") %>
+  </div>
+</div>

@@ -6,6 +6,7 @@ class User < ApplicationRecord
           :confirmable, :lockable
 
   has_many :topics
+  has_many :bookmarks, dependent: :destroy
 
   before_save { self.role ||= :member }
 

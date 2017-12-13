@@ -5,9 +5,8 @@ module BookmarksHelper
 
     if url[0].include?("http") || url[0].include?("www")
       url.shift
-      url = url.join(".")
     end
 
-    url
+    url.join(".")
   end
 end

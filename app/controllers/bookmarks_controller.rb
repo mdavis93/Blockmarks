@@ -1,14 +1,32 @@
 class BookmarksController < ApplicationController
+  before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
   def show
-    @bookmark = Bookmark.find(params[:id])
     @first_menu_link_name = "Share Bookmark"
     @first_menu_url = @bookmark
   end
 
+  def new
+    @bookmark = Bookmark.new
+  end
+
+  def create
+    @topic = Topic.find(params[:topic_id])
+    @bookmark = @topic.bookmarks.build(bookmark_params)
+    @bookmark.user = current_user
+
+    respond_to do |format|
+      if @bookmark.save
+        format.json { head :no_content }
+        format.js
+      else
+        format.json { render json: @bookmark.errors.full_messages,
+                      status: :unprocessable_entity }
+      end
+    end
+  end
+
   def edit
-    if policy(Bookmark.find(params[:id])).edit?
-      @bookmark = Bookmark.find(params[:id])
-    else
+    if !policy(@bookmark).edit?
       flash[:alert] = "You are not authroized to do that!"
       if !current_user
         redirect_to new_user_session_path
@@ -19,37 +37,18 @@ class BookmarksController < ApplicationController
   end
 
   def update
-    @bookmark = Bookmark.find(params[:id])
-    @bookmark.assign_attributes(bookmark_params)
-
-    if @bookmark.save
-      flash[:notice] = "Bookmark Updated Successfully!"
-      redirect_to [@bookmark.topic, @bookmark]
-    else
-      flash.now[:alert] = "There was an error updating the bookmark, please try again!"
-    end
-  end
-
-  def new
-    @bookmark = Bookmark.new
-  end
-
-  def create
-    @topic = Topic.find(params[:topic_id])
-    @bookmark = @topic.bookmarks.build(bookmark_params)
-
-    if @bookmark.save
-      flash[:notice] = "Bookmark was saved successfully!"
-      redirect_to [@topic, @bookmark]
-    else
-      flash.now[:alert] = "There was an error saving the bookmark. Please try again."
-      render :new
+    respond_to do |format|
+      if @bookmark.update_attributes(bookmark_params)
+        format.json { head :no_content }
+        format.js
+      else
+        format.json { render json: @bookmark.errors.full_messages,
+                      status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
-    @bookmark = Bookmark.find(params[:id])
-
     if @bookmark.destroy
       flash[:notice] = "Bookmark was deleted successfully!"
       redirect_to @bookmark.topic
@@ -63,7 +62,12 @@ class BookmarksController < ApplicationController
 
 
   private
+  def set_bookmark
+    @bookmark = Bookmark.find(params[:id])
+  end
+
   def bookmark_params
-    params.require(:bookmark).permit(:url)
+    # User the current bookmark's topic for now, ask Chris how to convert
+    params.require(:bookmark).permit(:url, :topic_id)
   end
 end

@@ -11,7 +11,26 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
 //= require rails-ujs
 //= require bootstrap
 //= require_tree .
+//= require_self
+
+$( document ).ready(function() {
+    console.log( "ready!" );
+    $("#error_explanation").html("Errors Go Here");
+});
+
+$(document).ajaxError(function(event, xht, options, exc) {
+  console.log("AJAX Error Caught!")
+  var errors = JSON.parse(xhr.responseText);
+  var er = "<ul>";
+
+  for( var i = 0; i < errors. length; i++ ) {
+    var list = errors[i];
+    er += "<li>" + list + "</li>";
+  }
+
+  er += "</ul>";
+  $("#error_explanation").html(er);
+});

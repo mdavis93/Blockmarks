@@ -1,0 +1,21 @@
+<%= form_for [@bookmark.topic, @bookmark], remote: true, :html => { :role => "form" } do |f| %>
+  <div id="error_explanation" class="bg-danger text-danger">
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <div class="form-group">
+        <%= f.label "Bookmark URL" %>
+        <%= f.text_field :url, class: "form-control first_input" %>
+      </div>
+    </div>
+
+    <div class="col-sm-12">
+      <div class="form-group">
+        <%= f.submit @bookmark.new_record? ? "Add Bookmark" : "Save Changes", class: "btn btn-primary" %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+<% end %>
