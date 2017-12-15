@@ -1,0 +1,6 @@
+<% puts @bookmark.inspect %>
+$('#bookmark_modal h4').html("<small><i class=' glyphicon glyphicon-floppy-save'></i></small>&emsp; Create New Bookmark");
+
+$('.modal-body').html('<%= j render :partial => "create_form", locals: { topic: @topic, bookmark: @bookmark } %>');
+
+$('#bookmark_modal').modal("show");

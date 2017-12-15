@@ -16,21 +16,23 @@
 //= require_tree .
 //= require_self
 
-$( document ).ready(function() {
-    console.log( "ready!" );
-    $("#error_explanation").html("Errors Go Here");
-});
 
-$(document).ajaxError(function(event, xht, options, exc) {
-  console.log("AJAX Error Caught!")
-  var errors = JSON.parse(xhr.responseText);
-  var er = "<ul>";
+$(document).ready(function() {
 
-  for( var i = 0; i < errors. length; i++ ) {
-    var list = errors[i];
-    er += "<li>" + list + "</li>";
-  }
+  $(document).on('ajax:success', 'form.bookmark_form', function(event, data, status, xhr) {
+    $('.log').text( "Triggered AjaxComplete Handler");
+    console.log($(this) + " called ajax:success" );
+  });
 
-  er += "</ul>";
-  $("#error_explanation").html(er);
+  $(document).on('ajax:error', 'form.bookmark_form', function(event, jqxhr, settings, thrownError){
+    let $error_selector = $("#error_selector");
+    let data = event.detail.toString().split(" ");
+    data.shift();
+    data = data.join(" ").split(",");
+    console.log(this.toString());
+    $error_selector.html(data[0]);
+    console.log("\nError: " + data[0]);
+    $error_selector.removeClass("bg-danger text-danger");
+    $error_selector.addClass("alert alert-danger");
+  });
 });

@@ -1,5 +1,13 @@
-<%= form_for [@bookmark.topic, @bookmark], remote: true, :html => { :role => "form" } do |f| %>
+<%= form_for bookmark, remote: true, :html => { :role => "form", :class => "bookmark_form" } do |f| %>
   <div id="error_explanation" class="bg-danger text-danger">
+    <% if bookmark.errors.any? %>
+      <h4><%= pluralize(bookmark.errors.count, "error") %>.</h4>
+      <ul>
+        <% bookmark.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
 
   <div class="row">
@@ -13,7 +21,7 @@
 
     <div class="col-sm-12">
       <div class="form-group">
-        <%= f.submit @bookmark.new_record? ? "Add Bookmark" : "Save Changes", class: "btn btn-primary" %>
+        <%= f.submit bookmark.new_record? ? "Add Bookmark" : "Save Changes", class: "btn btn-primary" %>
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       </div>
     </div>
