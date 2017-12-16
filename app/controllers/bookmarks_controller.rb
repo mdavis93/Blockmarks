@@ -8,7 +8,8 @@ class BookmarksController < ApplicationController
   end
 
   def new
-    @bookmark = Bookmark.new
+    @topic = Topic.find(params[:topic_id])
+    @bookmark = @topic.bookmarks.new
   end
 
   def create
@@ -34,6 +35,9 @@ class BookmarksController < ApplicationController
         redirect_to topics_path
       end
     end
+
+    @topic = Topic.find(params[:topic_id])
+    @bookmark = Bookmark.find(params[:id])
   end
 
   def update

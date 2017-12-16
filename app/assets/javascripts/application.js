@@ -20,19 +20,18 @@
 $(document).ready(function() {
 
   $(document).on('ajax:success', 'form.bookmark_form', function(event, data, status, xhr) {
-    $('.log').text( "Triggered AjaxComplete Handler");
+    $(".log").text( "Triggered AjaxComplete Handler");
     console.log($(this) + " called ajax:success" );
   });
 
   $(document).on('ajax:error', 'form.bookmark_form', function(event, jqxhr, settings, thrownError){
-    let $error_selector = $("#error_selector");
-    let data = event.detail.toString().split(" ");
+    data = event.detail.toString().split(" ");
     data.shift();
     data = data.join(" ").split(",");
     console.log(this.toString());
-    $error_selector.html(data[0]);
+    $("#error_explanation").html(data[0]);
     console.log("\nError: " + data[0]);
-    $error_selector.removeClass("bg-danger text-danger");
-    $error_selector.addClass("alert alert-danger");
+    $("#error_explanation").removeClass("bg-danger text-danger");
+    $("#error_explanation").addClass("alert alert-danger");
   });
 });

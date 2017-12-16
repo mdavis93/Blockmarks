@@ -1,4 +1,4 @@
-<%= form_for [bookmark.topic, bookmark], remote: true, :html => { :role => "form", :class => "bookmark_form" } do |f| %>
+<%= form_for [@topic, @bookmark], remote: true, :html => { :role => "form", :class => "bookmark_form" } do |f| %>
   <div id="error_explanation" class="bg-danger text-danger">
     <% if bookmark.errors.any? %>
       <h4><%= pluralize(bookmark.errors.count, "error") %>.</h4>
