@@ -20,6 +20,8 @@ Bookmark.destroy_all
 end
 users = User.all
 
+users.sample.topics.create!(title: 'General')
+
 15.times do
   user = users.sample
   user.topics.create!(

@@ -2,17 +2,30 @@
 <p>Find me in app/views/topics/show.html.erb</p>
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-12">
 
-    <% @topic.bookmarks.each do |bookmark| %>
-      <div class="media">
-        <div class="media-body">
-          <div class="media-heading">
-            <%= link_to "#{bookmark.url}", topic_bookmark_path(@topic, bookmark) %>
-
+    <% @topic.bookmarks.sort_by{ |e| e.url.downcase }.each do |bookmark| %>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <% if policy(Like.new).create? %>
+              <% if current_user && like = current_user.liked(bookmark) %>
+                <%= link_to [bookmark, like], method: :delete do %>
+                  <span class="glyphicon glyphicon-bookmark add-bookmark favorited"></span>
+                <% end %>
+              <% else %>
+                <%= link_to [bookmark, Like.new], method: :post do %>
+                  <span class="glyphicon glyphicon-bookmark add-bookmark"></span>
+                <% end %>
+              <% end %>
+            <% end %>
+            <%= link_to bookmark do %>
+              <div class="caption">
+                <div style="background-color: #eee; height: 200px"></div>
+                <h3 class="text-center"><%= bookmark.url %></h3>
+              </div>
+            <% end %>
           </div>
         </div>
-      </div>
     <% end %>
   </div>
 

@@ -5,26 +5,28 @@ class BookmarksController < ApplicationController
   def show
     @first_menu_link_name = 'Share Bookmark'
     @first_menu_url = @bookmark
+
   end
 
   def new
-    @topic = Topic.find(params[:topic_id])
-    @bookmark = @topic.bookmarks.new
+    @bookmark = Bookmark.new
   end
 
+  # rubocop:disable Metrics/AbcSize
   def create
-    @topic = Topic.find(params[:topic_id])
-    @bookmark = @topic.bookmarks.create(bookmark_params)
+    @bookmark = current_user.bookmarks.create(bookmark_params)
     @bookmark.user = current_user
     respond_to do |format|
       if @bookmark.save
         format.json { head :no_content }
         format.js
+        current_user.likes.create!(bookmark: @bookmark) unless current_user.liked(@bookmark)
       else
         format.json { render json: @bookmark.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def edit
     unless policy(@bookmark).edit?
@@ -36,7 +38,6 @@ class BookmarksController < ApplicationController
       end
     end
 
-    @topic = Topic.find(params[:topic_id])
     @bookmark = Bookmark.find(params[:id])
   end
 
@@ -55,6 +56,7 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
+    @bookmark = Bookmark.find(params[:id])
     if @bookmark.destroy
       flash[:notice] = 'Bookmark was deleted successfully!'
       redirect_to @bookmark.topic

@@ -3,14 +3,13 @@ class Bookmark < ApplicationRecord
 
   belongs_to :topic
   belongs_to :user
-  # before_save :valid_url
+  has_many :likes, dependent: :destroy
 
   validates :url, presence: true, uniqueness: { case_sensitive: false }
   validates :user, presence: true
   validate :valid_url
 
   def valid_url
-    puts "\nValidating URL\n"
 
     # Check if the URL is valid by making a GET request, and checking for HTTPSuccess
     request = HTTParty.get(url) rescue nil

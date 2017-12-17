@@ -3,10 +3,10 @@
 
     <h1><%= format_link(@bookmark.url) %></h1>
     <% if policy(@bookmark).edit? %>
-      <%= link_to "Edit", edit_topic_bookmark_path(@bookmark.topic, @bookmark), remote: true, class: 'btn btn-sm btn-info' %>
+      <%= link_to "Edit", edit_bookmark_path(@bookmark), remote: true, class: 'btn btn-sm btn-info' %>
     <% end %>
     <% if policy(@bookmark).destroy? %>
-      <%= link_to "Delete", [@bookmark.topic, @bookmark], remote: true, method: :delete, data: { confirm: "Delete Bookmark Permanently?" }, class: 'btn btn-sm btn-danger' %>
+      <%= link_to "Delete", bookmark_path(@bookmark), remote: true, method: :delete, data: { confirm: "Delete Bookmark Permanently?" }, class: 'btn btn-sm btn-danger' %>
     <% end %>
 
     <div>

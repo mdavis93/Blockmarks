@@ -1,10 +1,10 @@
-<div class="media">
-  <div class="media-body">
-    <h4 class="media-heading">
-      <%= link_to topic_entry.title, topic_path(topic_entry) %>
-    </h4>
-    <small>
-      Contains <%= topic_entry.bookmarks.count %> bookmarks.
-    </small>
+<div class="col-md-4">
+  <div class="list-group">
+    <%= link_to topic_path(topic_entry), class: 'list-group-item' do %>
+      <h4 class="list-group-item-heading"><%= topic_entry.title %><small class="pull-right"><span class="glyphicon glyphicon-heart"></span> <%= topic_entry.bookmarks.count %></small></h4>
+      <p class="list-group-item-text">
+        <small><%= topic_entry.bookmarks.count %> Bookmarks</small>
+      </p>
+    <% end %>
   </div>
 </div>

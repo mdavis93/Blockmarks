@@ -12,7 +12,10 @@
 
   <div class="row">
     <div class="col-sm-12">
-
+      <div class="form-group">
+        <%= f.label "Bookmark Topic" %>
+        <%= collection_select(:bookmark, :topic_id, Topic.all, :id, :title, {prompt: false}, {class: 'form-control'}) %>
+      </div>
       <div class="form-group">
         <%= f.label "Bookmark URL" %>
         <%= f.text_field :url, class: "form-control first_input" %>
