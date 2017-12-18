@@ -8,7 +8,7 @@
         <div class="col-sm-6 col-md-4">
           <div class="thumbnail">
             <% if policy(Like.new).create? %>
-              <% if current_user && like = current_user.liked(bookmark) %>
+              <% if current_user && (like = current_user.liked(bookmark)) %>
                 <%= link_to [bookmark, like], method: :delete do %>
                   <span class="glyphicon glyphicon-bookmark add-bookmark favorited"></span>
                 <% end %>
@@ -21,7 +21,7 @@
             <%= link_to bookmark do %>
               <div class="caption">
                 <div style="background-color: #eee; height: 200px"></div>
-                <h3 class="text-center"><%= bookmark.url %></h3>
+                <h3 class="text-center"><%= bookmark.display_name %></h3>
               </div>
             <% end %>
           </div>
@@ -29,7 +29,7 @@
     <% end %>
   </div>
 
-  <% if current_user && current_user.admin? %>
+  <% if current_user&.admin? %>
     <div class="col-md-4 alert alert-danger text-center">
       <p class="text-justify">Deleting this topic will also delete all related bookmarks from all users.
         Please exercise caution before proceeding as this is <strong>NOT REVERSIBLE</strong>.</p>

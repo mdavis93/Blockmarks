@@ -1,7 +1,9 @@
 <div class="row" id="bookmark_<%= @bookmark.id %>">
+  <div class="col-md-6">
+    <%= image_tag('http://via.placeholder.com/550x500?text=placeholder-image', size: "550x500", class: "bookmark-preview") %>
+  </div>
   <div class="col-md-6" >
 
-    <h1><%= format_link(@bookmark.url) %></h1>
     <% if policy(@bookmark).edit? %>
       <%= link_to "Edit", edit_bookmark_path(@bookmark), remote: true, class: 'btn btn-sm btn-info' %>
     <% end %>
@@ -12,13 +14,17 @@
     <div>
       <p></p>
       <p>
+        URL: <%= @bookmark.url %><br>
+        Category:&#9;&#9;<%= @bookmark.topic.title %><br>
         Created By: <%= @bookmark.user.email.split('@')[0] %><br>
         Created On: <%= @bookmark.created_at.strftime("%b %e, %Y") %>
       </p>
-    </div>
-  </div>
 
-  <div class="col-md-6">
-    <%= image_tag('http://via.placeholder.com/550x500?text=placeholder-image', size: "550x500", class: "bookmark-preview") %>
+      <p>
+        Times Bookmarked: 1234<br>
+        Times Favorited: 123
+
+      </p>
+    </div>
   </div>
 </div>

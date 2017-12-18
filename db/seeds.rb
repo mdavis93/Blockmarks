@@ -32,7 +32,8 @@ topics = Topic.all
 
 50.times do
   topic_to_use = topics.sample
-  topic_to_use.bookmarks.create!(url: Faker::Internet.domain_name, user: users.sample)
+  domain = Faker::Internet.domain_name
+  topic_to_use.bookmarks.create!(url: domain, user: users.sample, name: domain)
 end
 bookmarks = Bookmark.all
 

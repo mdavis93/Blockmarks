@@ -41,6 +41,10 @@ nav.navbar li:hover {
     -moz-transform: scale(1.2);
     transform: scale(1.2);
     opacity: 1;
+
+    & .add-bookmark.favorited {
+      text-shadow: -3px 4px 8px #444;
+    }
   }
 
   .caption {
@@ -61,7 +65,6 @@ nav.navbar li:hover {
     }
     &.favorited {
       color: #ffb43c;
-      text-shadow: -3px 4px 8px #444;
       &:hover {
         color: #888;
         text-shadow: none;
