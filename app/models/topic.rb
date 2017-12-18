@@ -6,10 +6,11 @@ class Topic < ApplicationRecord
     if user.nil?
       false
     else
-      user.bookmarks.each do |bm|
-        return true if bm.topic == self
+      bookmarks.each do |bm|
+        return true if Like.where('bookmark_id = ?', bm.id).count > 0
       end
     end
+    false
   end
 
   def favorite_count(user)
@@ -23,7 +24,6 @@ class Topic < ApplicationRecord
         ).count
       end
     end
-
     count
   end
 end

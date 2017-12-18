@@ -5,10 +5,14 @@
   <div class="col-md-6" >
 
     <% if policy(@bookmark).edit? %>
-      <%= link_to "Edit", edit_bookmark_path(@bookmark), remote: true, class: 'btn btn-sm btn-info' %>
+      <%= link_to edit_bookmark_path(@bookmark), remote: true, class: 'btn btn-sm btn-info' do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+      <% end %>
     <% end %>
     <% if policy(@bookmark).destroy? %>
-      <%= link_to "Delete", bookmark_path(@bookmark), remote: true, method: :delete, data: { confirm: "Delete Bookmark Permanently?" }, class: 'btn btn-sm btn-danger' %>
+      <%= link_to bookmark_path(@bookmark), remote: true, method: :delete, data: { confirm: "Delete Bookmark Permanently?" }, class: 'btn btn-sm btn-danger' do %>
+        <span class="glyphicon glyphicon-trash"></span>
+      <% end %>
     <% end %>
 
     <div>
