@@ -6,11 +6,11 @@ if Rails.env.development? || Rails.env.production?
     authentication: :plain,
     user_name:      ENV['MAILGUN_SMTP_LOGIN'],
     password:       ENV['MAILGUN_SMTP_PASSWORD'],
-    domain:         'obscure-journey-53154.herokuapp.com',
+    domain:         'mywebmarks.herokuapp.com',
     content_type:   'text/html'
   }
 
-  ActionMailer::Base.raise_delivery_errors = true;
+  ActionMailer::Base.raise_delivery_errors = true
 
   # This interceptor just makes sure that local mail
   # only emails you.
