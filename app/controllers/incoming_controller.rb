@@ -21,15 +21,15 @@ class IncomingController < ApplicationController
       # This was skipped as I didn't much like the idea of just ~anyone~ being
       # able to email the system and create an account, essentially bypassing Devise
 
-    if user && url && request.success?
+    if user && url
     # Check if the topic is nil, if so, create and save a new topic
       if !topic
-        t = Topic.create(title: params["subject"], user: user)
-        t.bookmarks.create(url: url)
+        t = Topic.create!(title: params["subject"], user: user)
+        t.bookmarks.create!(url: url, user: user)
         t.save
         puts "Created New Topic With Bookmark Successfully!"
       else
-        topic.bookmarks.create(url: url)
+        topic.bookmarks.create!(url: url, user: user)
         topic.save
         puts "Added Bookmark To Topic Successfully!"
       end
