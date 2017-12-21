@@ -8,13 +8,13 @@
 User.destroy_all
 Topic.destroy_all
 Bookmark.destroy_all
+Like.destroy_all
 
 
 5.times do
-  pw = Faker::Internet.password
   User.create!(
     email: Faker::Internet.safe_email,
-    password: pw,
+    password: 'helloworld',
     confirmed_at: Time.now
   )
 end
@@ -30,14 +30,14 @@ users.sample.topics.create!(title: 'General')
 end
 topics = Topic.all
 
-50.times do
+100.times do
   topic_to_use = topics.sample
   domain = Faker::Internet.domain_name
   topic_to_use.bookmarks.create!(url: domain, user: users.sample, name: domain)
 end
 bookmarks = Bookmark.all
 
-#Admin User
+# Admin User
 User.create!(
   email: "admin@blocmark.com",
   password: "helloworld",
@@ -45,14 +45,19 @@ User.create!(
   role: 1
 )
 
-#Normal User 1
+10.times do
+  user = users.find_by_email('admin@blocmark.com')
+  Like.create!(bookmark_id: bookmarks.sample.id, user_id: user.id)
+end
+
+# Normal User 1
 User.create!(
   email: "test@blocmark.com",
   password: "helloworld",
   confirmed_at: Time.now
 )
 
-#Normal User 2
+# Normal User 2
 User.create!(
   email: "other@blocmark.com",
   password: "helloworld",

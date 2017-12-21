@@ -21,16 +21,17 @@ $(document).ready(function() {
 
   $(document).on('ajax:success', 'form.bookmark_form', function(event, data, status, xhr) {
     $(".log").text( "Triggered AjaxComplete Handler");
-    console.log($(this) + " called ajax:success" );
   });
 
   $(document).on('ajax:error', 'form.bookmark_form', function(event, jqxhr, settings, thrownError){
-    data = event.detail.toString().split(" ");
-    data.shift();
-    data = data.join(" ").split(",");
-    console.log(this.toString());
-    $("#error_explanation").html(data[0]);
-    console.log("\nError: " + data[0]);
+      var html = '<h4 class="text-left">There are ' + event.detail[0].length + ' Errors:</h4><ul>';
+
+      for (var msg in event.detail[0]) {
+          html += '<li>' + event.detail[0][msg] + '</li>';
+      }
+      html += '</ul>';
+
+    $("#error_explanation").html(html);
     $("#error_explanation").removeClass("bg-danger text-danger");
     $("#error_explanation").addClass("alert alert-danger");
   });
