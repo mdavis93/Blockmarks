@@ -3,104 +3,45 @@
   <p>Collect, Share, and Organize bookmarks from across the web!  <small><%= link_to "Read More", about_path %></small></p>
 </div> <!-- END JUMBOTRON -->
 
-<div class="row">
-  <div class="col-sm-12">
-    <div class="topic-header">
-      <h3><span class="pull-left">Sports</span></h3>
-      <span class="pull-right">
-        <%= link_to topics_path do %>
-          View All <span class="glyphicon glyphicon-chevron-right"></span>
-        <% end %>
-      </span>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-6 col-md-3">
-    <div class="thumbnail">
-      <span class="glyphicon glyphicon-bookmark add-bookmark"></span>
-      <div class="caption">
-        <div style="background-color: #eee; height: 200px"></div>
-        <h3 class="text-center">Page Title</h3>
+<% @topics.each do |t| %>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="topic-header">
+        <h3><span class="pull-left"><%= t.title %></span></h3>
+        <span class="pull-right">
+          <%= link_to t do %>
+            View All <span class="glyphicon glyphicon-chevron-right"></span>
+          <% end %>
+        </span>
       </div>
     </div>
   </div>
-  <div class="col-sm-6 col-md-3">
-    <div class="thumbnail">
-      <span class="glyphicon glyphicon-bookmark add-bookmark favorited"></span>
-      <div class="caption">
-        <div style="background-color: #eee; height: 200px"></div>
-        <h3 class="text-center">Page Title</h3>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-md-3">
-    <div class="thumbnail">
-      <span class="glyphicon glyphicon-bookmark add-bookmark"></span>
-      <div class="caption">
-        <div style="background-color: #eee; height: 200px"></div>
-        <h3 class="text-center">Page Title</h3>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-md-3">
-    <div class="thumbnail">
-      <span class="glyphicon glyphicon-bookmark add-bookmark favorited"></span>
-      <div class="caption">
-        <div style="background-color: #eee; height: 200px"></div>
-        <h3 class="text-center">Page Title</h3>
-      </div>
-    </div>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-sm-12">
-    <div class="topic-header">
-      <h3><span class="pull-left">Shopping</span></h3>
-      <span class="pull-right">
-        <%= link_to topics_path do %>
-          View All <span class="glyphicon glyphicon-chevron-right"></span>
-        <% end %>
-      </span>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-6 col-md-3">
-    <div class="thumbnail">
-      <span class="glyphicon glyphicon-bookmark add-bookmark favorited"></span>
-      <div class="caption">
-        <div style="background-color: #eee; height: 200px"></div>
-        <h3 class="text-center">Page Title</h3>
+  <div class="row">
+    <% t.bookmarks.order('RANDOM()').limit(4).each do |b| %>
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail">
+          <% if policy(Like.new).create? %>
+            <% if current_user && (like = current_user.liked(b)) %>
+              <%= link_to [b, like], method: :delete do %>
+                <span class="glyphicon glyphicon-bookmark add-bookmark favorited"></span>
+              <% end %>
+            <% else %>
+              <%= link_to [b, Like.new], method: :post do %>
+                <span class="glyphicon glyphicon-bookmark add-bookmark"></span>
+              <% end %>
+            <% end %>
+          <% end %>
+          <%= link_to b do %>
+            <div class="caption">
+              <div style="background-color: #eee; height: 200px"></div>
+              <h3 class="text-center"><%= b.display_name %></h3>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
-  <div class="col-sm-6 col-md-3">
-    <div class="thumbnail">
-      <span class="glyphicon glyphicon-bookmark add-bookmark favorited"></span>
-      <div class="caption">
-        <div style="background-color: #eee; height: 200px"></div>
-        <h3 class="text-center">Page Title</h3>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-md-3">
-    <div class="thumbnail">
-      <span class="glyphicon glyphicon-bookmark add-bookmark"></span>
-      <div class="caption">
-        <div style="background-color: #eee; height: 200px"></div>
-        <h3 class="text-center">Page Title</h3>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-md-3">
-    <div class="thumbnail">
-      <span class="glyphicon glyphicon-bookmark add-bookmark"></span>
-      <div class="caption">
-        <div style="background-color: #eee; height: 200px"></div>
-        <h3 class="text-center">Page Title</h3>
-      </div>
-    </div>
-  </div>
-</div>
+<% end %>
+
+<%= console %>

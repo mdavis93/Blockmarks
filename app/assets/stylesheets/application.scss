@@ -17,6 +17,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body {
+  margin-bottom: 5em;
+}
+
 nav.navbar li:hover {
   background-color: #eee;
 }
@@ -42,8 +46,12 @@ nav.navbar li:hover {
     transform: scale(1.2);
     opacity: 1;
 
-    & .add-bookmark.favorited {
-      text-shadow: -3px 4px 8px #444;
+    & .add-bookmark {
+      opacity: 1;
+      
+      & .favorited {
+        text-shadow: -3px 4px 8px #444;
+      }
     }
   }
 
@@ -51,6 +59,7 @@ nav.navbar li:hover {
     overflow-x: hidden;
   }
   .add-bookmark {
+    opacity: 0;
     position: absolute;
     font-size: 2.5em;
     color: #888;
@@ -64,6 +73,7 @@ nav.navbar li:hover {
       cursor: pointer;
     }
     &.favorited {
+      opacity: 1;
       color: #ffb43c;
       &:hover {
         color: #888;
