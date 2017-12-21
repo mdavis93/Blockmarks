@@ -48,10 +48,9 @@ nav.navbar li:hover {
 
     & .add-bookmark {
       opacity: 1;
-      
-      & .favorited {
-        text-shadow: -3px 4px 8px #444;
-      }
+    }
+    & .favorited {
+      text-shadow: -3px 4px 8px #444;
     }
   }
 
