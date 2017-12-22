@@ -5,23 +5,15 @@ class IncomingController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
 
   def create
+    puts "\nINCOMING PARAMS:\n#{params}"
     user = User.find_by_email(params["sender"])
-    topic = Topic.find_by_title(params["subject"])
+    return head 200 unless user
 
     url = params["body-plain"]
 
-    if user && url
-      if !topic
-        topic = Topic.create!(title: params["subject"], user: user)
-        b = Bookmark.new(url: url, topic: topic, user: user)
-        b.save if b.valid?
-        puts "Created New Topic With Bookmark Successfully!"
-      else
-        Bookmarks.new(url: url,topic: topic, user: user)
-        b.save if b.valid?
-        puts "Added Bookmark To Topic Successfully!"
-      end
-    end
+    topic = create_topic(params["subject"], user)
+    b = create_bookmark(url, topic, user)
+
     head 200
   end
 end
