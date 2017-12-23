@@ -10,7 +10,7 @@
       <% end %>
     <% end %>
     <% if policy(@bookmark).destroy? %>
-      <%= link_to bookmark_path(@bookmark), remote: true, method: :delete, data: { confirm: "Delete Bookmark Permanently?" }, class: 'btn btn-sm btn-danger' do %>
+      <%= link_to @bookmark, method: :delete, data: { confirm: "Delete Bookmark Permanently?" }, class: 'btn btn-sm btn-danger' do %>
         <span class="glyphicon glyphicon-trash"></span>
       <% end %>
     <% end %>
@@ -19,7 +19,7 @@
       <p></p>
       <p>
         URL: <%= @bookmark.url %><br>
-        Category:&#9;&#9;<%= @bookmark.topic.title %><br>
+        Category: <%= @bookmark.topic.title %><br>
         Created By: <%= @bookmark.user.email.split('@')[0] %><br>
         Created On: <%= @bookmark.created_at.strftime("%b %e, %Y") %>
       </p>
