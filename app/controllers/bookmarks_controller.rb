@@ -3,6 +3,7 @@ class BookmarksController < ApplicationController
   before_action :set_bookmark, only: %i[show edit update destroy]
 
   def index
+    @all_bookmarks = Bookmark.all
     @bookmark = Bookmark.where(user_id: current_user.id)
                         .sort_by { |e| e.url.downcase }
     @like = Like.where(user_id: current_user.id).pluck(:bookmark_id)
