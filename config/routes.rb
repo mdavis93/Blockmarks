@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'likes/index'
 
   resources :topics
-  resources :bookmarks, except: [:index] do
+  resources :bookmarks do
     resources :likes, only: %i[index create destroy]
   end
 
