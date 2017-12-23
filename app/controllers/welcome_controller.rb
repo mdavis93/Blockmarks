@@ -1,8 +1,8 @@
 class WelcomeController < ApplicationController
   def index
-    # TODO: Change syntax to match production DB method for RAND()
+    @first_menu_link_url = bookmarks_path
+    @first_menu_link_name = 'My Bookmarks'
     @topics = Topic.includes(bookmarks: [:likes]).all
-
   end
 
   def about; end

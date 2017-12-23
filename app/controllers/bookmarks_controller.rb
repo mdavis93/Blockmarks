@@ -2,10 +2,15 @@
 class BookmarksController < ApplicationController
   before_action :set_bookmark, only: %i[show edit update destroy]
 
+  def index
+    @bookmark = Bookmark.where(user_id: current_user.id)
+                        .sort_by { |e| e.url.downcase }
+    @like = Like.where(user_id: current_user.id).pluck(:bookmark_id)
+  end
+
   def show
     @first_menu_link_name = 'Share Bookmark'
     @first_menu_url = @bookmark
-
   end
 
   def new
@@ -73,7 +78,6 @@ class BookmarksController < ApplicationController
   end
 
   def bookmark_params
-    # User the current bookmark's topic for now, ask Chris how to convert
     params.require(:bookmark).permit(:url, :topic_id)
   end
 end

@@ -24,7 +24,7 @@
 
           <div class="collapse navbar-collapse" id="navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li><a href="<% @first_menu_link_url %>"><%= @first_menu_link_name || "Dynamic Link" %></a></li>
+              <li><a href="<%= @first_menu_link_url %>"><%= @first_menu_link_name || "Dynamic Link" %></a></li>
               <li><a href="#">Link</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -89,7 +89,6 @@
       <%= render 'bookmarks/bookmark_modal' %>
 <!-- END MODAL RENDER -->
       <%= yield %>
-
     </div>
   </body>
 </html>
