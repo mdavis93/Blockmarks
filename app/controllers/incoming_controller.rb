@@ -6,14 +6,32 @@ class IncomingController < ApplicationController
 
   def create
     puts "\nINCOMING PARAMS:\n#{params}"
-    user = User.find_by_email(params["sender"])
+    user = User.find_by_email(params['sender'])
     return head 200 unless user
 
-    url = params["body-plain"]
+    url = params['body-plain'].strip
+    topic = Topic.find_by(title: 'From Email')
+    topic = Topic.create(title: 'From Email', user: user) if topic.nil?
 
-    topic = create_topic(params["subject"], user)
     b = create_bookmark(url, topic, user)
 
-    head 200
+    return_code(b)
+  end
+
+  def create_bookmark(url, topic, user)
+    b = Bookmark.new(url: url, topic: topic, user: user)
+
+    b unless b.invalid?
+  end
+
+  def return_code(bookmark)
+    head 400 if bookmark.nil?
+    if bookmark.save
+      head 201
+    else
+      head 422
+    end
   end
 end
+
+
