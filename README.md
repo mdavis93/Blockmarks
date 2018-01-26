@@ -15,3 +15,4 @@ This project uses [Devise](https://github.com/plataformatec/devise) authenticati
 **NOTE:**
 1. UN/PW: test@favimarks.com | helloworld
 2. To add new bookmark, include the prefix [http(s)://]
+3. May take up to 20 seconds for heroku to load the app
