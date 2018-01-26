@@ -11,6 +11,7 @@ This project uses [Devise](https://github.com/plataformatec/devise) authenticati
 2. In an effort to try to control the validity of URLs saved in the system, each bookmark is validated prior to adding it to the system.  The URL is tested and checked for an HTML Success return code using [HTTParty](https://github.com/jnunemaker/httparty) to call the URL via <code>GET</code>, and check for <code>response.success?</code>
 
 [Limited Working Sample of Project](https://mywebmarks.herokuapp.com)
-*NOTE:*
+
+**NOTE:**
 1. UN/PW: test@favimarks.com | helloworld
 2. To add new bookmark, include the prefix [http(s)://]
